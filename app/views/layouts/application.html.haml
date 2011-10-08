@@ -1,0 +1,17 @@
+%html
+  %head
+    %title cMoM
+    = stylesheet_link_tag :application
+    = javascript_include_tag :application
+    = csrf_meta_tags
+    %body
+      #container
+        %header
+          %nav
+            %ul
+              = render 'shared/navigation'
+          - flash.each do |name, msg|
+            = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+        #main{:role => "main"}
+          = yield
+        %footer
