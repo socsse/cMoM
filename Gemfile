@@ -32,7 +32,7 @@ gem "haml-rails", ">= 0.3.4", :group => :development
 gem "devise", ">= 1.4.4"
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano', :group => :development
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
