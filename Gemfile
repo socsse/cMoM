@@ -26,7 +26,7 @@ gem "factory_girl_rails", ">= 1.2.0", :group => :test
 gem "rspec-rails", ">= 2.6.1", :group => [:development, :test]
 
 # using Haml instead of ERB
-gem "haml-rails", ">= 0.3.4", :group => :development
+gem "haml-rails", ">= 0.3.4"
 
 # authorization
 gem "devise", ">= 1.4.4"
