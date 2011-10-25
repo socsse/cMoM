@@ -37,3 +37,10 @@ gem 'capistrano', :group => :development
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+gem 'activemessaging', :git => 'git://github.com/sgulics/activemessaging.git'
+gem 'daemons'
+gem 'stomp'
+
+# gem 'activemessaging', :git => 'git://github.com/kookster/activemessaging.git'
+# gem 'activemessaging'
+
