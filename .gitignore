@@ -13,6 +13,7 @@
 /vendor/bundle/
 
 # minimal Rails specific artifacts
+config/broker.yml
 db/*.sqlite3
 /log/*
 tmp/*
