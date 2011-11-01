@@ -13,7 +13,7 @@ end
 gem 'jquery-rails'
 
 # database related gems
-gem "bson_ext", ">= 1.4.0"
+gem "bson_ext", ">= 1.3.1"
 gem "mongoid", ">= 2.3.0"
 gem "database_cleaner", ">= 0.6.7", :group => :test
 gem "mongoid-rspec", ">= 1.4.4", :group => :test
