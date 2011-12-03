@@ -23,8 +23,9 @@ after 'deploy:update_code', 'deploy:symlink_broker'
 
 namespace :deploy do
 
-  desc "Symbolic link the broker.yml to protected broker.yml"
-  task :symlink_broker, :roles => :app do
+  desc "Symbolic link generated config files"
+  task :symlink_config_files, :roles => :app do
+    run "ln -nfs #{deploy_to}/shared/config/aws.yml #{release_path}/config/aws.yml"
     run "ln -nfs #{deploy_to}/shared/config/broker.yml #{release_path}/config/broker.yml"
   end
 
