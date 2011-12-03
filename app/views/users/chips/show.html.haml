@@ -1,0 +1,15 @@
+%h1 #{@chip.name}
+
+%h2 Microcontroller Settings
+System Clock Source: #{@chip.microcontroller.clock_source}
+System Clock Frequency: #{@chip.microcontroller.clock_frequency}
+Operating Conditions: #{@chip.microcontroller.operating_conditions}
+
+%h2 Memory Settings
+Embedded Non Volatile Memory (eNVM): #{@chip.memory.nvm}
+Embedded SRAM (eSRAM): #{@chip.memory.nvm}
+External Memory Interface: #{@chip.memory.emi}
+
+%p
+= link_to "Edit", [:edit, @user, @chip]
+= link_to "Back to #{@user.name}", @user

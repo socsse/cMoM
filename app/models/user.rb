@@ -1,4 +1,5 @@
 class User
+
   include Mongoid::Document
 
   # Include default devise modules. Others available are:
@@ -7,6 +8,8 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
 
   field :name
+
+  embeds_many :chips
 
   validates_presence_of :name
   validates_uniqueness_of :name, :email, :case_sensitive => false

@@ -6,25 +6,25 @@ require "active_resource/railtie"
 require "sprockets/railtie"
 
 if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
 end
 
 module CMoM
+
   class Application < Rails::Application
-    config.autoload_paths += %W(#{config.root}/app/processors)
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/app/processors)
+    # config.autoload_paths += %W(#{config.root}/lib)
+    # config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
-    config.plugins = [ :activemessaing, :all ]
+    config.plugins = [ "jqgrid-rails3" ]
 
     # Activate observers that should always be running.
     # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
@@ -54,6 +54,8 @@ module CMoM
       g.helper_specs false
       g.view_specs false
     end
+
+#    config.action_view.field_error_proc = Proc.new { { |html_tag, instance| "#{html_tag}".html_safe } }
 
   end
 end

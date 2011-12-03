@@ -1,0 +1,17 @@
+= semantic_form_for [user, chip] do |form|
+  = form.inputs do
+    = form.input :name
+    %h2 Microcontroller Settings 
+    = form.semantic_fields_for chip.microcontroller do |microcontroller|
+      = microcontroller.input :clock_source, :as => :select, :collection => microcontroller.object.options_for_clock_source
+      = microcontroller.input :clock_frequency
+      = microcontroller.input :operating_conditions, :as => :select, :collection => microcontroller.object.options_for_operating_conditions
+    %h2 Memory Settings
+    = form.semantic_fields_for chip.memory do |memory|
+      = memory.input :nvm,  :as => :select, :collection => memory.object.options_for_nvm
+      = memory.input :sram, :as => :select, :collection => memory.object.options_for_sram
+      = memory.input :emi
+  %p
+  = form.buttons do
+    %li= form.commit_button "Save"
+    %li= link_to "Cancel", @user

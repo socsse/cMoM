@@ -14,8 +14,9 @@ gem 'jquery-rails'
 
 # database related gems
 gem "bson_ext", ">= 1.3.1"
-gem "mongoid", ">= 2.3.0"
 gem "database_cleaner", ">= 0.6.7", :group => :test
+gem "kaminari", ">= 0.12.4"
+gem "mongoid", ">= 2.3.0"
 gem "mongoid-rspec", ">= 1.4.4", :group => :test
 
 # using higher level testing tools (RSpec & Cucumber)
@@ -41,6 +42,9 @@ gem 'activemessaging', :git => 'git://github.com/sgulics/activemessaging.git'
 gem 'daemons'
 gem 'stomp'
 
-# gem 'activemessaging', :git => 'git://github.com/kookster/activemessaging.git'
-# gem 'activemessaging'
+gem 'compass', '>= 0.12.alpha'
+gem 'compass-susy-plugin', '>= 0.9', :require => 'susy'
 
+gem 'formtastic'
+
+gem 'aws-sdk'

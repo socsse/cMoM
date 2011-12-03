@@ -1,9 +1,11 @@
 CMoM::Application.routes.draw do
 
-  root :to => "home#index"
+  root :to => 'home#index'
 
   devise_for :users
-  resources :users, :only => :show
+  resources :users, :only => :show do
+    resources :chips, :controller => 'users/chips'
+  end
 
   resources "add_job_to_queue", :only => [:index, :create]
 

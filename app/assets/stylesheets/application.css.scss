@@ -1,6 +1,24 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require formtastic
+ *= require formtastic_ie6
+ *= require formtastic_ie7
+ *
+ *= require_self
+ *= require_tree .
+*/
+
+/* 
+@import "compass/reset";
+@import "compass/css3/transition";
+*/
+
 header nav ul {
   list-style: none;
-  margin: 0 0 2em;
+  margin: 1 0 2em;
   padding: 0;
 }
 header nav ul li {
@@ -14,7 +32,24 @@ header nav ul li {
   background-color: #CFC;
   border: solid 1px #6C6;
 }
+
 #flash_alert {
   background-color: #FCC;
   border: solid 1px #C66;
 }
+
+/* The error box */
+
+.field_with_errors {
+  border: 2px solid red;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
