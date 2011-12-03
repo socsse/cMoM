@@ -19,7 +19,7 @@ set :use_sudo, false
 
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "app_rsa")]
 
-after 'deploy:update_code', 'deploy:symlink_broker'
+after 'deploy:update_code', 'deploy:symlink_config_files'
 
 namespace :deploy do
 
