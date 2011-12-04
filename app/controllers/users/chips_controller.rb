@@ -57,7 +57,7 @@ class Users::ChipsController < ApplicationController
     unique_user_dir = @chip.user._id
     chip_name = @chip.name
 
-    dst_file_name = "#{unique_user_dir}/#{chip_name}.config"
+    dst_file_name = "#{unique_user_dir}/chip_#{chip_name}/config.xml"
     s3_object = bucket.objects[dst_file_name]
     s3_object.write(@chip.config_file)
 
