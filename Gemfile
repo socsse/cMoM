@@ -48,3 +48,6 @@ gem 'compass-susy-plugin', '>= 0.9', :require => 'susy'
 gem 'formtastic'
 
 gem 'aws-sdk'
+
+gem 'execjs'
+gem 'therubyracer'
