@@ -19,10 +19,7 @@ set :use_sudo, false
 
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "app_rsa")]
 
-after 'deploy:update_code' do
-  'deploy:precomiple_assets'
-  'deploy:symlink_config_files'
-end
+after "deploy:update", "deploy:precompile_assets", "deploy:symlink_config_files"
 
 namespace :deploy do
 
@@ -34,6 +31,7 @@ namespace :deploy do
 
   desc "Precompile assets for production"
   task :precompile_assets, :roles => :app do
+    run "cd #{current_path}; rm -rf public/assets/*"
     run "cd #{release_path}; RAILS_ENV=production bundle exec rake assets:precompile"
   end
 
