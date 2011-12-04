@@ -19,7 +19,7 @@ set :use_sudo, false
 
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "app_rsa")]
 
-after "deploy:update", "deploy:precompile_assets", "deploy:symlink_config_files"
+after "deploy:update", "deploy:symlink_config_files", "deploy:precompile_assets"
 
 namespace :deploy do
 
