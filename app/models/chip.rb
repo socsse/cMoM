@@ -1,7 +1,7 @@
 class Chip
   include Mongoid::Document
 
-  field :name,       type: String
+  field :name, type: String
 
   embeds_one  :job
 

@@ -1,5 +1,7 @@
 require 'bundler/capistrano'
 
+load 'deploy/assets'
+
 set :application, "cMoM"
 
 set :scm, 'git'

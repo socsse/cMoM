@@ -54,7 +54,10 @@ class Users::ChipsController < ApplicationController
     s3 = AWS::S3.new
     bucket = s3.buckets.create("cmom.microsemi.com")
 
-    dst_file_name = "#{@chip.user.email}/#{@chip.name}.config"
+    unique_user_dir = @chip.user._id
+    chip_name = @chip.name
+
+    dst_file_name = "#{unique_user_dir}/#{chip_name}.config"
     s3_object = bucket.objects[dst_file_name]
     s3_object.write(@chip.config_file)
 
