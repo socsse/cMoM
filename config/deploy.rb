@@ -1,7 +1,5 @@
 require 'bundler/capistrano'
 
-load 'deploy/assets'
-
 set :application, "cMoM"
 
 set :scm, 'git'
@@ -21,14 +19,22 @@ set :use_sudo, false
 
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "app_rsa")]
 
-after 'deploy:update_code', 'deploy:symlink_config_files'
+after 'deploy:update_code' do
+  'deploy:precomiple_assets'
+  'deploy:symlink_config_files'
+end
 
 namespace :deploy do
 
-  desc "Symbolic link generated config files"
+  desc "Symbolicly link generated config files"
   task :symlink_config_files, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/config/aws.yml #{release_path}/config/aws.yml"
     run "ln -nfs #{deploy_to}/shared/config/broker.yml #{release_path}/config/broker.yml"
+  end
+
+  desc "Precompile assets for production"
+  task :precompile_assets, :roles => :app do
+    run "cd #{release_path}; RAILS_ENV=production bundle exec rake assets:precompile"
   end
 
   task :start, :roles => :app do
