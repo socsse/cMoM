@@ -1,5 +1,3 @@
-####### Note these tests have been deprecated as they haven't been updated in line with the code base.  ####### 
-
 require 'rubygems'
 require 'rspec'
 require 'active_support'

@@ -6,6 +6,3 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
-//= require jqgrid/jquery.jqGrid.src
-//= require jqgrid/i18n/grid.locale-en.js

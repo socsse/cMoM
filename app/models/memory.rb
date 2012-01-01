@@ -14,4 +14,12 @@ class Memory
     def options_for_sram
       [["16 Kbytes", "16"], ["32 Kbytes", "32"], ["64 Kbytes", "64"]]
     end
+
+    def json_obj_for_config_file
+      {
+        :nvm => self.nvm,
+        :sram => self.sram,
+        :emi => self.emi
+      }
+    end
 end

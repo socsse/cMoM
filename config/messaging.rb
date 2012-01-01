@@ -10,11 +10,13 @@ ActiveMessaging::Gateway.define do |s|
 
   case Rails.env
     when 'production'
-      s.destination :job_queue, 'CMoMJobQueue'
+      s.destination :job_status_queue, 'CMoMJobStatusQueue'
+      s.destination :job_todo_queue,   'CMoMJobTodoQueue'
     when 'test'
-      s.destination :job_queue, '/queue/CMoMJobQueue'
+      s.destination :job_status_queue, '/queue/CMoMJobStatusQueue'
+      s.destination :job_todo_queue,   '/queue/CMoMJobTodoQueue'
     else
-      s.destination :job_queue, '/queue/CMoMJobQueue'
+      s.destination :job_status_queue, '/queue/CMoMJobStatusQueue'
+      s.destination :job_todo_queue,   '/queue/CMoMJobTodoQueue'
     end
-
 end

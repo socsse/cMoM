@@ -1,5 +1,10 @@
+require 'aws'
 require 'yaml'
 
-config = YAML.load_file(ERB.new(File.join(Rails.root, "config", "aws.yml")).result)
-Rails.logger.info "#{config}"
-AWS.config( config )
+AWS.config(:logger => Rails.logger)
+
+AWS_CONFIG_DATA = YAML.load(ERB.new(File.read(File.join(Rails.root, "config", "aws.yml"))).result)[Rails.env]
+Rails.logger.info "#{AWS_CONFIG_DATA}"
+
+AWS.config( AWS_CONFIG_DATA )
+

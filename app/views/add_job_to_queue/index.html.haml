@@ -3,6 +3,8 @@
 %h1 Send Message
 = form_tag :action => "create" do
   = label_tag :message, "Message" 
+
+
   = text_field_tag :message, @message
   = submit_tag "submit" 
 

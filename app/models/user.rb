@@ -17,4 +17,15 @@ class User
   # for security, prevent mass-assignment operations
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
+  def chips_config_file_as_json(chip)
+    # TODO: Validate chip belongs to user
+    {
+      :user => {
+        :id => self._id,
+        :name => self.name,
+        :email => self.email,
+        :chip => chip.json_obj_for_config_file
+      }
+    }.to_json
+  end
 end

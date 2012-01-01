@@ -1,3 +1,11 @@
 %h1 Chips
-- @chips.each do |chip|
-  #{chip.name}
+%table
+  %tbody
+    - @chips.each do |chip|
+      %tr
+        %td= #{chip.name}
+        -if chip.job
+          %td= #{chip.job.status}
+        -else
+          %td= "not-started"
+

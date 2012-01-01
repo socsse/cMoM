@@ -4,7 +4,11 @@ CMoM::Application.routes.draw do
 
   devise_for :users
   resources :users, :only => :show do
-    resources :chips, :controller => 'users/chips'
+    resources :chips, :controller => 'users/chips' do
+      member do
+        get 'test_job_msg'
+      end
+    end
   end
 
   resources "add_job_to_queue", :only => [:index, :create]

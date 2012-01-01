@@ -3,8 +3,21 @@
 
 - unless @user.chips.empty?
   %h2 Chips
-  - @user.chips.each do |chip|
-    %ul= link_to chip.name, [:edit, @user, chip]
-
+  %table
+    %tbody
+      - @user.chips.each do |chip|
+        %tr
+          %td= link_to chip.name, [:edit, @user, chip]          
+          -if chip.job != nil
+            %td= chip.job.status
+            - case chip.job.status
+              - when Job::STATUS[:test_running] then
+                %td= link_to "Finish Job", test_job_msg_user_chip_path(@user, chip, :msg => Job::STATUS[:finished])
+            -if chip.job.output_file
+              -logger.info "Output_file in DB is #{chip.job.output_file}"
+              %td= link_to "Output File", chip.job.output_file
+          -else
+            %td= "not-started"
 %p
+= link_to "Refresh", user_path(@user)
 = link_to "Create new chip", new_user_chip_path(@user)

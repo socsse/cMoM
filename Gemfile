@@ -28,6 +28,7 @@ gem "rspec-rails", ">= 2.6.1", :group => [:development, :test]
 
 # using Haml instead of ERB
 gem "haml-rails", ">= 0.3.4"
+gem "coffee-filter"
 
 # authorization
 gem "devise", ">= 1.4.4"
@@ -51,3 +52,6 @@ gem 'aws-sdk'
 
 gem 'execjs'
 gem 'therubyracer'
+
+gem 'rails-asset-jqueryui'
+gem 'rails-asset-jqgrid'
