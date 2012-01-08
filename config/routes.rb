@@ -3,7 +3,7 @@ CMoM::Application.routes.draw do
   root :to => 'home#index'
 
   devise_for :users
-  resources :users, :only => :show do
+  resources :users do
     resources :chips, :controller => 'users/chips' do
       member do
         get 'test_job_msg'

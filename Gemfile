@@ -55,3 +55,6 @@ gem 'therubyracer'
 
 gem 'rails-asset-jqueryui'
 gem 'rails-asset-jqgrid'
+
+# alternative method to generate JSON/XML representation (instead of using as/to json in the model)
+gem 'rabl'
