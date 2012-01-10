@@ -14,7 +14,25 @@ class Users::ChipsController < ApplicationController
   end
 
   def index
-    @chips = Chip.all
+    respond_to do |format|
+      format.html
+      format.json {
+
+        @current_page  = params[:page] ? params[:page].to_i : 1
+        chips_per_page = params[:rows] ? params[:rows].to_i : 10
+
+        sort_field = params[:sidx] ? params[:sidx] : "name"
+        sort_order = params[:sord] ? params[:sord] : "desc"
+
+        @chips = @user.chips( sort: [[ sort_field, sort_order]]).page(@current_page).per(chips_per_page)
+
+        @total_chips = @chips.count
+        @total_pages = (@total_chips / chips_per_page) + (@total_chips % chips_per_page ? 1 : 0)
+
+        render :layout => "chips_index"
+      }
+    end
+    @chips = @user.chips
   end
 
   def show
@@ -47,6 +65,14 @@ class Users::ChipsController < ApplicationController
     @chip.job.save!
 
     redirect_to @user, :notice => "Job queued for #{@chip.name}"
+  end
+
+  def destroy
+    @chip = @user.chips.find(params[:id])
+    @chip.destroy
+
+    # jqgrid will take care of the updating
+    render :nothing => true
   end
 
   def submit_job

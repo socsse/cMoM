@@ -27,4 +27,8 @@ module ApplicationHelper
     content_for(:head) { javascript_include_tag(*files) }
   end
 
+  def meta_tag(name, value)
+    content_for( :head ) { tag :meta, :name => name, :content => value unless value.blank? }
+  end
+
 end

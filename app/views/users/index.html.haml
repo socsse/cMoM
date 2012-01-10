@@ -1,6 +1,22 @@
-:javascript
-  $.jgrid.no_legacy_api = true;
-  $.jgrid.useJSON = true;
-#users_grid_container
-  %table#users_grid.scroll
-  #users_grid_pager.scroll
+- javascript 'grid_object'
+:coffeescript
+  class UsersGrid extends cMoMGridObject
+
+    grid_json_id: -> 'user.id'
+    grid_json_url: -> '/users.json'
+    grid_resource_url: -> '/users'
+
+    grid_data_model: =>
+      [
+        { name:'user.name', label:'Name', index:'name', width: 200, align: 'right' }
+        { name:'user.email', label:'E-Mail', index:'email', width: 300 }
+      ]
+
+    jgrid_caption: -> 'Users'
+
+  jQuery ->
+    window.grid_object = new UsersGrid
+
+#grid_container
+  %table#grid.scroll
+  #grid_pager.scroll

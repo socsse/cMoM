@@ -1,23 +1,56 @@
-%p 
-  User: #{@user.name}
+- javascript 'grid_object'
+:coffeescript
+  class ChipsGrid extends cMoMGridObject
 
-- unless @user.chips.empty?
-  %h2 Chips
-  %table
-    %tbody
-      - @user.chips.each do |chip|
-        %tr
-          %td= link_to chip.name, [:edit, @user, chip]          
-          -if chip.job != nil
-            %td= chip.job.status
-            - case chip.job.status
-              - when Job::STATUS[:test_running] then
-                %td= link_to "Finish Job", test_job_msg_user_chip_path(@user, chip, :msg => Job::STATUS[:finished])
-            -if chip.job.output_file
-              -logger.info "Output_file in DB is #{chip.job.output_file}"
-              %td= link_to "Output File", chip.job.output_file
-          -else
-            %td= "not-started"
-%p
-= link_to "Refresh", user_path(@user)
+    grid_json_id:      -> 'chip.id'
+    grid_json_url:     -> "/users/#{@user.id}/chips.json"
+    grid_resource_url: -> "/users/#{@user.id}/chips"
+
+    edit_link_formatter: (cellvalue, options, rowobject) =>
+      '<a href=' + @.grid_resource_url() + '/' + rowobject.chip.id + '/edit>' + cellvalue + '</a>'
+
+    job_status_formatter: (cellvalue, options, rowobject) =>
+      status = cellvalue
+      if (status == 'test_running')
+        url = @.grid_resource_url() + '/' + rowobject.chip.id + '/test_job_msg?msg=finished'
+        status += (' <a href=' + url + '>Finish Test</a>')
+      status
+
+    job_output_file_formatter: (cellvalue, options, rowobject) =>
+      '<a href=' + cellvalue + '>' + cellvalue + '</a>'
+
+    grid_data_model: =>
+      [
+        {
+          formatter: @.edit_link_formatter
+          name:  'chip.name', 
+          label: 'Name', 
+          index: 'name', 
+          width: 150 
+        }
+        {
+          formatter: @.job_status_formatter
+          name:  'chip.job.status'
+          label: 'Job Status'
+          index: 'chip.job.status'
+          width: 150
+        }
+        {
+          formatter: @.job_output_file_formatter
+          name:  'chip.job.output_file'
+          label:    'Output File'
+          sortable: false
+          width:    150
+        }
+      ]
+
+    jgrid_caption: -> 'Chips'
+
+  jQuery ->
+    window.grid_object = new ChipsGrid
+
+#grid_container
+  %table#grid.scroll
+  #grid_pager.scroll
+
 = link_to "Create new chip", new_user_chip_path(@user)
