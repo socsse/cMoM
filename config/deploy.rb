@@ -1,5 +1,4 @@
 require 'bundler/capistrano'
-load    'deploy/assets'
 
 set :application, "cMoM"
 
@@ -51,4 +50,6 @@ namespace :deploy do
   end
 
 end
+
+load    'deploy/assets'
 
