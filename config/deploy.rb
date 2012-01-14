@@ -1,4 +1,5 @@
 require 'bundler/capistrano'
+load    'deploy/assets'
 
 set :application, "cMoM"
 
@@ -19,7 +20,8 @@ set :use_sudo, false
 
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "app_rsa")]
 
-after "deploy:update", "deploy:symlink_config_files", "deploy:precompile_assets"
+after "deploy:update", "deploy:symlink_config_files"
+#, "deploy:precompile_assets"
 
 namespace :deploy do
 
@@ -29,11 +31,11 @@ namespace :deploy do
     run "ln -nfs #{deploy_to}/shared/config/broker.yml #{release_path}/config/broker.yml"
   end
 
-  desc "Precompile assets for production"
-  task :precompile_assets, :roles => :app do
-    run "cd #{current_path}; rm -rf public/assets/*"
-    run "cd #{release_path}; RAILS_ENV=production bundle exec rake assets:precompile"
-  end
+#  desc "Precompile assets for production"
+#  task :precompile_assets, :roles => :app do
+#    run "cd #{current_path}; rm -rf public/assets/*"
+#    run "cd #{release_path}; RAILS_ENV=production bundle exec rake assets:precompile"
+#  end
 
   task :start, :roles => :app do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
