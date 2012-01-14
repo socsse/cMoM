@@ -43,7 +43,7 @@ CMoM::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile = '*.js'
+  config.assets.precompile << '*_pc.js'
 
   # ActionMailer Config, no errors will be raised
   #
