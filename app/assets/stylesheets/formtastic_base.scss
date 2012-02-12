@@ -588,12 +588,12 @@ $button_float: left;
         float: none; }
       @else {
         float: left;
-        width: $label_width - $label_pad;
-        @else if $label_float == "left" {
-          padding-left: $label_pad;
-          text-align: left; }
-        @else {
-          text-align: right; } } }
+        width: $label_width - $label_pad; }
+      @if $label_float == "left" {
+        padding-left: $label_pad;
+        text-align: left; }
+      @else {
+        text-align: right; } }
     fieldset {
       legend {
         @if $label_float == "clear" {
@@ -605,15 +605,15 @@ $button_float: left;
             clear: both;
             float: none; } }
         @else {
-          width: $label_width - $label_pad;
-          @else if $label_float == "left" {
+          width: $label_width - $label_pad; }
+        @if $label_float == "left" {
             padding-left: $label_pad; }
           @else {
             padding-right: $label_pad;
             text-align: right; }
           span.label {
             position: absolute;
-            width: $label_width - $label_pad; } } }
+            width: $label_width - $label_pad; } }
       ol {
         @if $label_float == "clear" {
           padding: 0; }
@@ -625,7 +625,7 @@ $button_float: left;
     @else {
       p.inline-hints, p.inline-errors, ul.errors {
         margin: 0 0 0 $label_width; }
-      @else if $full_width_inputs {
+      @if $full_width_inputs {
         &.string input, &.password input, &.numeric input, &.text textarea, select {
           width: $input_width; } }
       &.boolean label {
