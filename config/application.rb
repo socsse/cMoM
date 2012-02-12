@@ -50,7 +50,7 @@ module CMoM
     config.assets.version = '1.0'
 
     # required for compass
-    config.assets.precompile << /(^[^_]|\/[^_])[^\/]*/
+    # config.assets.precompile << /(^[^_]|\/[^_])[^\/]*/
 
     # Suppress RSpec tests for helpers and views
     config.generators do |g|
