@@ -49,6 +49,9 @@ module CMoM
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # required for compass
+    config.assets.precompile << /(^[^_]|\/[^_])[^\/]*/
+
     # Suppress RSpec tests for helpers and views
     config.generators do |g|
       g.helper_specs false
@@ -56,6 +59,11 @@ module CMoM
     end
 
 #    config.action_view.field_error_proc = Proc.new { { |html_tag, instance| "#{html_tag}".html_safe } }
+
+    config.to_prepare do
+      Devise::RegistrationsController.layout proc { |controller| user_signed_in? ? nil : nil }
+      Devise::SessionsController.layout      proc { |controller| user_signed_in? ? "application" : nil }
+    end
 
   end
 end

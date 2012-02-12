@@ -1,0 +1,16 @@
+.page {
+  background: white;
+  border: 1px solid #bbb;
+  padding: 0;
+  position: relative;
+  -webkit-box-shadow: 3px 3px 4px #bbb;
+
+  .page_header {
+    background: #EDF3FE;
+    margin: 0 0 5px 0;
+    padding: 13px 30px 13px 24px;
+  }
+  .page_body {
+    padding: 15px 15px 20px 20px
+  }
+}

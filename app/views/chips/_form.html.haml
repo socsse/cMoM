@@ -1,0 +1,49 @@
+- javascript 'chip_pc'
+:coffeescript
+  class ChipPeripheralGrid extends cMoMGridObject
+
+    grid_json_id:      -> "peripheral.id"
+    grid_json_url:     -> "/users/#{@user.id}/chips/#{@chip.id}/peripherals.json"
+    grid_resource_url: -> "/users/#{@user.id}/chips/#{@chip.id}/peripherals"
+
+    grid_data_model: =>
+      [
+        { type:'peripheral.type', label:'Type', index:'type', width: 100, align: 'left' }
+        { name:'peripheral.name', label:'Name', index:'name', width: 100, align: 'left' }
+        { name:'peripheral.description', label:'Description', index:'description', width: 200, align: 'left' }
+      ]
+
+    jgrid_caption: -> 'Peripherals'
+
+  jQuery ->
+    window.grid_object = new ChipPeripheralGrid
+
+= semantic_form_for [user, chip], :html => { :class => "chip_form" } do |form|
+  = form.inputs do
+    = form.input :name
+    .columns_2
+      .column_1
+        .column_title
+          %h2 Microcontroller Settings 
+        .column_body
+          = form.semantic_fields_for chip.microcontroller do |microcontroller|
+            = microcontroller.input :clock_source, :label => "Clock Source:", :as => :select, :collection => microcontroller.object.options_for_clock_source
+            = microcontroller.input :clock_frequency, :label => "Clock Frequency:"
+            = microcontroller.input :operating_conditions, :label => "Operating Conditions:", :as => :select, :collection => microcontroller.object.options_for_operating_conditions
+      .column_2
+        .column_title
+          %h2 Memory Settings
+        .column_body
+          = form.semantic_fields_for chip.memory do |memory|
+            = memory.input :nvm,  :label => "NVM:", :as => :select, :collection => memory.object.options_for_nvm
+            = memory.input :sram, :label => "SRAM:", :as => :select, :collection => memory.object.options_for_sram
+            = memory.input :emi,  :label => "Use EMI", :as => :boolean
+  %br
+  %p
+  #grid_container
+    %table#grid.scroll
+    #grid_pager.scroll
+  %br
+  = form.buttons do
+    %li= form.commit_button "Save"
+    %li= link_to "Cancel", @user

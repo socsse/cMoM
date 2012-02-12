@@ -2,12 +2,14 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.1'
 
-# Gems used only for assets and not required
-# in production environments by default.
+# Gems used only for assets and not required in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.1.4'
-  gem 'coffee-rails', '~> 3.1.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sprockets'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
+  gem 'compass', '>= 0.12.alpha'
+  gem 'compass-susy-plugin', :require => 'susy'
 end
 
 gem 'jquery-rails'
@@ -42,9 +44,6 @@ gem 'capistrano', :group => :development
 gem 'activemessaging', :git => 'https://github.com/kookster/activemessaging.git'
 gem 'daemons'
 gem 'stomp'
-
-gem 'compass', '>= 0.12.alpha'
-gem 'compass-susy-plugin', '>= 0.9', :require => 'susy'
 
 gem 'formtastic'
 

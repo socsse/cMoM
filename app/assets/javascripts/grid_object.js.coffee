@@ -19,13 +19,14 @@ class this.cMoMGridObject
   setup_grid_btns_model: =>
     [
       { 
-        name: ''
-        width: 24
+        name: 'actions'
+        index: 'actions'
+        width: 55
         align: 'center'
         resizable: false
         sortable: false
         search: false 
-        formatter: -> '<span class="ui-icon ui-icon-trash"></span>'
+        formatter: 'actions'
       }
     ]
 
@@ -65,11 +66,19 @@ class this.cMoMGridObject
       sortname:    @.jgrid_sortname()
       sortorder:   @.jgrid_sortorder()
       viewrecords: true
+      addGridRow: @.jgrid_addGridRow
       beforeSelectRow: @.jgrid_beforeSelectRow
       editGridRow: @.jgrid_editGridRow
       onSelectRow: @.jgrid_onSelectRow
     )
-    @.grid().jqGrid( 'navGrid', @.grid_pager_id(), {add:true, addtitle:'Add', edit:false, del:false} )
+    @.grid().jqGrid( 'navGrid', @.grid_pager_id(), 
+      {
+        add:true 
+        addtitle:'Add' 
+        addfunc:@.jgrid_addGridRow
+        edit:false
+        del:false
+      })
     @.grid().jqGrid( 'gridResize' )
     true
 
@@ -80,6 +89,9 @@ class this.cMoMGridObject
       @.grid().delGridRow( rowid, $.extend( { reloadAfterSubmit: true }, @.destroy_path( rowid ) ) )
       return false
     true
+
+  jgrid_addGridRow: =>
+    window.location.href = @.grid_resource_url() + '/new'
 
   jgrid_editGridRow: (id, properties) =>
     if (rowid == 'new')

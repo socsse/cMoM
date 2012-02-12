@@ -1,3 +1,9 @@
-%h3 Home
-- @users.each do |user|
-  %p User: #{link_to user.name, user}
+#tabs
+  %ul
+    %li= link_to "Sign Up", new_user_registration_path, :remote => true
+    %li= link_to "Log In",  new_user_session_path, :remote => true
+    %li= link_to "Edit User",  edit_user_registration_path, :remote => true
+
+:coffeescript
+  jQuery -> 
+    $("#tabs").tabs()

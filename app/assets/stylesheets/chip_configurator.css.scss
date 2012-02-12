@@ -1,3 +1,28 @@
 // Place all the styles related to the ChipConfigurator controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.chip_form {
+  @include stack-form;
+
+  .columns_2 {
+    .column_title {
+    }
+    .column_body {
+      border: 1px solid #bbb;
+      padding: 0.5em;
+      
+      li:last-child {
+        margin-bottom: 0;
+      }
+    }
+    .column_1 {
+      float: left;
+      width: 48%;
+    }
+    .column_2 {
+      float: right;
+      width: 48%;
+    }
+  }      
+} 

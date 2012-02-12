@@ -1,0 +1,6 @@
+= semantic_form_for [user, chip, peripheral], :html => { :class => "peripheral_form" } do |form|
+  = form.inputs do
+    = form.input :name
+  = form.buttons do
+    %li= form.commit_button "Save"
+    %li= link_to "Cancel", @user

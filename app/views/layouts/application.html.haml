@@ -8,9 +8,14 @@
     %body
       #container
         %header
+          .company_logo
+            = link_to image_tag( "/assets/microsemi.gif"), "http://www.microsemi.com/soc"
           %nav
-            %ul
-              = render 'shared/navigation'
+            - if user_signed_in?
+              %ul
+                %li= current_user.email
+                %li= link_to 'My Account', edit_user_registration_path, :remote => true
+                %li= link_to 'Log Out', destroy_user_session_path, :method => :delete
           - flash.each do |name, msg|
             = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
         #main{:role => "main"}

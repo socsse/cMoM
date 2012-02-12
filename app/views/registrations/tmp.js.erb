@@ -1,0 +1,9 @@
+$("#edit-dialog").dialog({
+  autoOpen: true,
+  modal: true,
+  width: 600,
+  title: "Edit Account Info",
+  open: function() {
+    $("#edit-dialog").html("<%= escape_javascript(render('form')) %>")
+  }
+});

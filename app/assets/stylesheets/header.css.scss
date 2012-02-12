@@ -1,0 +1,42 @@
+$nav-info-color: #ccc;
+$nav-link-color: #003D78;
+
+#container header {
+  height:    75px;
+  margin:     0px;
+  padding:    0px;
+  background-image: url( asset_path( "header.gif", image ));
+  background-repeat: repeat-x;
+
+  .company_logo {
+    float: left;
+    margin-top: 17px;
+  }
+
+  nav {
+    float: right;
+    font-size: 11px;
+    margin-top: 7px;
+
+    li {
+      color:   $nav-info-color;
+      display: inline-block;
+      padding: 0 .25em 0 0;
+
+      a {
+        @include hover_link;
+        @include link_colors( $nav-link-color, false, false, false, false );
+      }
+      &:after {
+        content:   " | ";
+        color:     $nav-info-color;
+        display:   inline-block;
+        font-size: 100%;
+        margin:    0 0 0 .5em;
+      }
+      &:last-child:after { content: " "; }
+    }
+  }
+}
+
+

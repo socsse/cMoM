@@ -2,7 +2,7 @@ require 'activemessaging/processor'
 require 'aws'
 require 'tempfile'
 
-class Users::ChipsController < ApplicationController
+class ChipsController < ApplicationController
 
   include ActiveMessaging::MessageSender
 

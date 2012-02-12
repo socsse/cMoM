@@ -2,11 +2,14 @@ class Chip
   include Mongoid::Document
 
   field :name, type: String
+  field :tmp_record, type: Boolean, default: false
 
   embeds_one  :job
 
   embeds_one  :microcontroller
   embeds_one  :memory
+
+  embeds_many :peripherals
 
   embedded_in :user
 
