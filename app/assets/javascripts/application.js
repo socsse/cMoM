@@ -10,14 +10,3 @@
 //=
 //= require rails.validations
 
-$(document).ready( function() { 
-  $(".cmom-button").hover(
-    function() {
-      $(this).addClass("ui-state-hover");
-    },
-    function() {
-      $(this).removeClass("ui-state-hover");
-    }
-  )
-}
-
