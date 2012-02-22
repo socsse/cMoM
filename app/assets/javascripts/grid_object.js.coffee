@@ -75,13 +75,11 @@ class this.cMoMGridObject
     @.grid().jqGrid( 'gridResize' )
     true
 
-  delGridRow: (row_id_s, options) =>
-    $.jgrid.del.msg = 'Are you sure, rowid='+rowid+'?'
-    @.grid().delGridRow( rowid, $.extend( { reloadAfterSubmit: true }, @.destroy_path( rowid ) ) )
-
   jgrid_beforeSelectRow: (rowid, e) =>
     column_id = $.jgrid.getCellIndex( e.target )
     if (column_id == 0)
+      $.jgrid.del.msg = 'Are you sure, rowid='+rowid+'?'
+      @.grid().delGridRow( rowid, $.extend( { reloadAfterSubmit: true }, @.destroy_path( rowid ) ) )
       return false
     true
 
