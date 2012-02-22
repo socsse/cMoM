@@ -14,9 +14,8 @@
 
 @import "**/*.scss";
 
-/* by default all content should reach the edges of the browser window and setup defaults for
- * background and text color 
-*/
+// by default all content should reach the edges of the browser window and setup defaults for
+// background and text color 
 body 
 {
   background-image: url( asset_path( "body_bg.gif", image ));
@@ -27,39 +26,18 @@ body
   padding: 0;
 }
 
-/* setup main content area width and center horizontally, also setup default background color */
+// setup main content area width and center horizontally, also setup default background color
 #container {
-  background-image:    url( asset_path( "container_bg.gif", image ));
+  background-image: url( asset_path( "container_bg.gif", image ));
   background-position: center top;
-  background-repeat:   repeat-y;
-  margin:   0 auto;
+  background-repeat: repeat-y;
+  margin: 0 auto;
   overflow: auto;
-  padding:  0 10px;
-  width:    751px;
+  padding: 0 10px;
+  width: 800px;
 }
 
-.ui-tabs.nav { width: 0em; padding: 0px; }
-
-.ui-tabs-panel { overflow: auto; }
-
-#user_new
-{
-  float: left;
-  width: 60%;
-  background: #9c9;
-  overflow: auto;
-}
-
-#user_new_other_links
-{
-  float: right;
-  width: 40%;
-  background: #c9c;
-  overflow: auto;
-}
-
-#main
-{
+#main {
   padding: 10px;
 }
 
@@ -91,4 +69,7 @@ body
   margin-bottom: 20px;
   background-color: #f0f0f0;
 }
+
+
+
 

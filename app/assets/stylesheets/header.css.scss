@@ -1,12 +1,12 @@
 @import "compass";
 
-$nav-info-color: #ccc;
+$nav-info-color: #888888;
 $nav-link-color: #003D78;
 
 #container header {
   height:    75px;
   margin:     0px;
-  padding:    0px;
+  padding:    0 10px;
   background-image: url( asset_path( "header.gif", image ));
   background-repeat: repeat-x;
 
@@ -19,6 +19,21 @@ $nav-link-color: #003D78;
     float: right;
     font-size: 11px;
     margin-top: 7px;
+
+    #login_container {
+      @include stack-form;
+
+      li {
+        color: black;
+        padding: 0 1em 0 0;
+      }
+      .input { margin: 0; }
+      a {
+        @include hover_link;
+        @include link_colors( $nav-info-color, false, false, false, false );
+      }
+      #user_remember_me_input { color: $nav-info-color; }
+    }
 
     li {
       color:   $nav-info-color;

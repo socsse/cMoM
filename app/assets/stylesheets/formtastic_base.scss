@@ -263,7 +263,14 @@ $floated_select_width: select-auto;
   .label {
     // Legend Left Margin Hack for IE
     #left: -0.5em;
-    #position: relative; } }
+    #position: relative; }
+  .checkbox, .radio {
+    li {
+      display: block;
+      float: left; }
+    input {
+      border: none;
+      float: left; } } }
 
 @mixin stack-form1($stacked_fieldset, $stacked_input, $stacked_padding, $stacked_button_align, $stacked_select_width) {
   @include reset-form;

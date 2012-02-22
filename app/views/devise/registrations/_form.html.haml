@@ -1,4 +1,9 @@
-#dialog
-  %h2 Edit Your Information
-  %p
-    #{link_to "Delete my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}.
+= semantic_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+  = devise_error_messages!
+  = f.inputs do
+    = f.input :name, :label => "Name:"
+    = f.input :email, :label => "Email:"
+    = f.input :password, :label => "Password:"
+    = f.input :password_confirmation, :label => "Password Confirmation:"
+  = f.buttons do
+    = f.commit_button "Sign Up"

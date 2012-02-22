@@ -1,3 +1,27 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#intro {
+  overflow: hidden;
+
+  .columns_2 {
+    .column_title {
+    }
+    .column_1 {
+      float: left;
+      .column_body {
+        height: 100%;
+        width: 250px;
+      }
+    }
+    .column_2 {
+      display: table;
+      float: right;
+      .column_body {
+        height: 100%;
+        width: 480px;
+      }
+    }
+  }      
+} 

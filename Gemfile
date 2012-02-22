@@ -8,8 +8,8 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'compass', '>= 0.12.alpha'
-  gem 'compass-susy-plugin', :require => 'susy'
+  gem 'compass-rails'
+  gem 'compass-susy-plugin'
 end
 
 gem 'jquery-rails'
@@ -57,3 +57,5 @@ gem 'rails-asset-jqgrid'
 
 # alternative method to generate JSON/XML representation (instead of using as/to json in the model)
 gem 'rabl'
+
+gem 'client_side_validations'

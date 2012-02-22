@@ -5,11 +5,14 @@ class ApplicationController < ActionController::Base
   before_filter :store_location
 
   def store_location
-    session[ :user_return_to ] = request.url unless params[ :controller ] == "devise/session"
+    controller_name = params[:controller]
+    session[:user_return_to] = request.url unless controller_name == "devise/registrations" || controller_name == "devise/sessions"
   end
 
-  def after_sign_in_path_for( resource )
-    stored_location_for( resource ) || root_path
+  def after_sign_in_path_for(resource)
+    path = stored_location_for(resource) || user_path(current_user)
+    Rails.logger.info "Returning path #{path}"
+    path
   end
 
 end

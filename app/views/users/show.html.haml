@@ -44,15 +44,19 @@
         }
       ]
 
-    jgrid_caption: -> 'Chips'
-
   jQuery ->
     window.grid_object = new ChipsGrid
 
-#grid_container
-  %table#grid.scroll
-  #grid_pager.scroll
-
-= link_to "Create new chip", new_user_chip_path(@user)
-
-
+.page
+  .page_header
+    %h2 Chips
+  .page_body
+    = link_to new_user_chip_path(@user), :class => "cmom-button cmom-button-icon-left ui-state-default ui-corner-all" do
+      %span.ui-icon.ui-icon-circle-plus
+      Create New Chip
+    %br
+    %br
+    %br
+    #grid_container
+      %table#grid.scroll
+      #grid_pager.scroll

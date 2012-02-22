@@ -1,21 +1,14 @@
-%h2 Sign up
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  = devise_error_messages!
-  %p
-    = f.label :name
-    %br/
-    = f.text_field :name
-  %p
-    = f.label :email
-    %br/
-    = f.email_field :email
-  %p
-    = f.label :password
-    %br/
-    = f.password_field :password
-  %p
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation
-  %p= f.submit "Sign up"
-= render "devise/shared/links"
+#tabs
+  %ul
+    %li
+      %a(href = "#signup_tab") Sign Up
+    %li
+      %a(href = "#signin_tab") Sign In
+  #signup_tab
+    = render "new"
+  #signin_tab
+    = render :partial => "/devise/sessions/new", :layout => nil
+
+:coffeescript
+  jQuery -> 
+    $("#tabs").tabs({selected: 0})

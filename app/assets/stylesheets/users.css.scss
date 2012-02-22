@@ -2,3 +2,28 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "formtastic_base.scss";
+
+#user_new {
+  overflow: hidden;
+  @include stack-form;
+
+  .columns_2 {
+    .column_body {
+      li:last-child {
+        margin-bottom: 0;
+      }
+    }
+    .column_1 {
+      float: left;
+      width: 38%;
+    }
+    .column_2 {
+      float: right;
+      width: 58%;
+    }
+  }      
+} 
+
+
+

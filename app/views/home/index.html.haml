@@ -1,9 +1,18 @@
-#tabs
-  %ul
-    %li= link_to "Sign Up", new_user_registration_path, :remote => true
-    %li= link_to "Log In",  new_user_session_path, :remote => true
-    %li= link_to "Edit User",  edit_user_registration_path, :remote => true
-
-:coffeescript
-  jQuery -> 
-    $("#tabs").tabs()
+.page
+  .page_header
+    %h2 Welcome to the SmartFusion cSoC Online Builder
+  .page_body
+    #intro
+      .columns_2
+        .column_1
+          .column_body
+            %h4.bold Designing a SmartFusion cSoC is easy and free.
+            %p
+              This online builder allows you to asdfasdf asdfa sdf asdfa sdfa sdfasd fasdf asdf
+              asdf adsfasdf asdfasd fasdf asdfa sdfa sdfasd fasdf asdfasd
+              asdf asdfa sdfasdf asdfas more adsfasd more adfasdfas dfasdf adsfa sd
+              asd fasdfa sdfasdfasd fasdf asdf
+            = link_to "Free! Get started here >", new_user_registration_path, :class => "medium orange button"
+        .column_2
+          .column_body
+            = link_to image_tag("cSoC_Banner.gif"), "http://www.actel.com/products/SmartFusion/default.aspx", { :target => "_blank" }

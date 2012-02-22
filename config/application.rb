@@ -60,10 +60,5 @@ module CMoM
 
 #    config.action_view.field_error_proc = Proc.new { { |html_tag, instance| "#{html_tag}".html_safe } }
 
-    config.to_prepare do
-      Devise::RegistrationsController.layout proc { |controller| user_signed_in? ? nil : nil }
-      Devise::SessionsController.layout      proc { |controller| user_signed_in? ? "application" : nil }
-    end
-
   end
 end
