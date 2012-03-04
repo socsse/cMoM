@@ -8,6 +8,11 @@
   -moz-box-shadow: 3px 3px 4px #BBBBBB;
   box-shadow: 3px 3px 4px #BBBBBB;
 
+  td {
+    text-align:left;
+    vertical-align:top;
+  }
+
   .page_header {
     background: #EDF3FE;
     margin: 0 0 5px 0;

@@ -46,6 +46,9 @@ gem 'daemons'
 gem 'stomp'
 
 gem 'formtastic'
+gem 'client_side_validations'
+gem 'client_side_validations-formtastic'
+gem 'client_side_validations-mongoid'
 
 gem 'aws-sdk'
 
@@ -58,4 +61,3 @@ gem 'rails-asset-jqgrid'
 # alternative method to generate JSON/XML representation (instead of using as/to json in the model)
 gem 'rabl'
 
-gem 'client_side_validations'

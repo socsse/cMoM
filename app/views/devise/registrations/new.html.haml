@@ -1,14 +1,12 @@
-#tabs
-  %ul
-    %li
-      %a(href = "#signup_tab") Sign Up
-    %li
-      %a(href = "#signin_tab") Sign In
-  #signup_tab
-    = render "new"
-  #signin_tab
-    = render :partial => "/devise/sessions/new", :layout => nil
-
-:coffeescript
-  jQuery -> 
-    $("#tabs").tabs({selected: 0})
+.page
+  .page_header
+    %h2 Sign Up
+  .page_body
+    - flash.each do |name, msg|
+      = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+    = render "/devise/registrations/form"
+    %ul#other_links
+      %li
+        Already have an account?
+        %br
+        = link_to "Sign in now", new_user_session_path

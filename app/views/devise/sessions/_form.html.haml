@@ -1,18 +1,9 @@
-= semantic_form_for(resource, :as => resource_name, :url => user_session_path) do |form|
-  - flash.each do |name, msg|
-    = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
-  .columns_2
-    .column_1
-      .column_body
-        = form.inputs do
-          = form.input :email, :label => "Email:"
-          = form.input :password, :label => "Password:"
-          - if devise_mapping.rememberable?
-            = form.input :remember_me, :as => :boolean, :label => "Remember me!"
-          = form.buttons do
-            = form.commit_button "Sign In"
-    .column_2
-      .column_body
-        Did you forget your password?
-        %br/
-        = link_to "Recover it here.", new_password_path(resource_name)
+= semantic_form_for(resource, :as => resource_name, :validate => true, :url => user_session_path) do |form|
+  = devise_error_messages!
+  = form.inputs do
+    = form.input :email, :label => "Email:", :validate => { :uniqueness => false }
+    = form.input :password, :label => "Password:"
+    - if devise_mapping.rememberable?
+      = form.input :remember_me, :as => :boolean, :label => "Remember me!"
+    = form.buttons do
+      = form.commit_button "Sign In"

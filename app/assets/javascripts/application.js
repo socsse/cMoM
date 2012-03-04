@@ -9,4 +9,5 @@
 //= require jquery-ui
 //=
 //= require rails.validations
+//= require rails.validations.formtastic
 

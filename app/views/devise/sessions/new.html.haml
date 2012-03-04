@@ -1,15 +1,16 @@
-#tabs
-  %ul
-    %li
-      %a(href = "#signup_tab") Sign Up
-    %li
-      %a(href = "#signin_tab") Sign In
-  #signup_tab
-    = render :partial => "/devise/registrations/new" 
-  #signin_tab
-    = render "new"
-
-:coffeescript
-  jQuery -> 
-    $("#tabs").tabs({selected: 1})
-
+.page
+  .page_header
+    %h2 Sign In
+  .page_body#signin_page
+    - flash.each do |name, msg|
+      = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+    = render "form"
+    %ul#other_links
+      %li
+        Did you forget your password?
+        %br
+        = link_to "Recover it here.", new_password_path(resource_name)
+      %li
+        Don't have an account?
+        %br
+        = link_to "Sign up now", new_user_registration_path

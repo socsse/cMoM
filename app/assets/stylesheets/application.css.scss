@@ -61,6 +61,12 @@ body
   border: 2px solid red;
 }
 
+.inline-errors {
+  color: #D00;
+  padding-left: 5px;
+  font-size: 12px;
+}
+
 #errorExplanation {
   width: 400px;
   border: 2px solid red;

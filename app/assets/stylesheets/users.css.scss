@@ -5,25 +5,21 @@
 @import "formtastic_base.scss";
 
 #user_new {
-  overflow: hidden;
   @include stack-form;
 
-  .columns_2 {
-    .column_body {
-      li:last-child {
-        margin-bottom: 0;
-      }
-    }
-    .column_1 {
-      float: left;
-      width: 38%;
-    }
-    .column_2 {
-      float: right;
-      width: 58%;
-    }
-  }      
+  float: left;
+  overflow: hidden;
 } 
+
+#other_links {
+  background: #F7F7F7;
+  float: left;
+  margin-left: 20px;
+  
+  li { margin-bottom: 20px; }
+  li:last-child { margin-bottom: 0; }
+}
+
 
 
 

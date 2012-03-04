@@ -27,8 +27,8 @@ class User
 
   embeds_many :chips
 
-  validates_presence_of :name
-  validates_uniqueness_of :name, :email, :case_sensitive => false
+  validates_presence_of :name, :email, :password, :password_confirmation
+  validates_uniqueness_of :email, :case_sensitive => false
 
   # for security, prevent mass-assignment operations
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
