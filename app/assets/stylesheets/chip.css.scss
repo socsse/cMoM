@@ -1,0 +1,28 @@
+// Place all the styles related to the ChipConfigurator controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "formtastic_base.scss";
+
+.chip_form {
+  @include stack-form;
+
+  .options {
+    border: 1px solid #bbb;
+    padding: 0.5em;
+      
+    li:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  #microcontroller_settings {
+    width: 48%;
+    float: left;
+  }
+
+  #memory_settings {
+    width: 48%;
+    float: right;
+  }      
+} 

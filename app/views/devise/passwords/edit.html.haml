@@ -1,0 +1,26 @@
+.page
+  .page_header
+    %h2 Change your password
+  .page_body#change_password_page
+    - flash.each do |name, msg|
+      = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+    = semantic_form_for( resource,
+                         :as => resource_name, 
+                         :html => { :method => :put },
+                         :url => password_path(resource_name), 
+                         :validate => true ) do |form|
+      = form.inputs do
+        = form.input :reset_password_token, :hidden
+        = form.input :password, :label => "New password:", :validate => true
+        = form.input :password_confirmation, :label => "Password confirmation:"
+      = form.buttons do
+        = form.commit_button "Change my password"
+    %ul#other_links
+      %li
+        Don't have an account?
+        %br
+        = link_to "Sign up now", new_user_registration_path
+      %li
+        Already have an account?
+        %br
+        = link_to "Sign in now", new_user_session_path
