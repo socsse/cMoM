@@ -50,7 +50,8 @@ class ChipsController < ApplicationController
   def create
     @chip = @user.chips.new(params[:chip])
     if @chip.save
-      redirect_to @user, :notice => "Chip created!"
+      submit_job
+      redirect_to @user
     else
         render :action => "new"
     end
@@ -61,10 +62,8 @@ class ChipsController < ApplicationController
     @chip.update_attributes!(params[:chip])
 
     submit_job
-    @chip.job.status = Job::STATUS[:queued]
-    @chip.job.save!
-
-    redirect_to @user, :notice => "Job queued for #{@chip.name}"
+    flash[:notice] = "Job queued for #{@chip.name}!"
+    redirect_to @user, :notice => flash[:notice]
   end
 
   def destroy
@@ -76,10 +75,17 @@ class ChipsController < ApplicationController
   end
 
   def submit_job
+
     # create configuration file and copy to S3
     #
     s3 = AWS::S3.new
-    bucket = s3.buckets.create("cmom.microsemi.com")
+
+    begin
+      bucket = s3.buckets.create("cmom.microsemi.com")
+    rescue SocketError
+      flash[:notice] = "Job couldn't be submitted"
+      return
+    end
 
     unique_user_dir = @chip.user._id
     chip_name = @chip.name
@@ -95,6 +101,12 @@ class ChipsController < ApplicationController
     message[:config_file] = dst_file_name
 
     publish :job_todo_queue, message.to_json
+
+    @chip.job.status = Job::STATUS[:queued]
+    @chip.job.save!
+
+    flash[:notice] = "Job queued for #{@chip.name}!"
+
   end
 
   def test_job_msg

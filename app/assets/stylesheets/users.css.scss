@@ -4,7 +4,7 @@
 
 @import "formtastic_base.scss";
 
-#user_new {
+#user_new, #user_edit {
   @include stack-form;
 
   float: left;

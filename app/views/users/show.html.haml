@@ -6,6 +6,9 @@
     grid_json_url:     -> "/users/#{@user.id}/chips.json"
     grid_resource_url: -> "/users/#{@user.id}/chips"
 
+    grid_del_row_title:  -> "Delete Chip"
+    grid_edit_row_title: -> "Edit Chip"
+
     edit_link_formatter: (cellvalue, options, rowobject) =>
       '<a href=' + @.grid_resource_url() + '/' + rowobject.chip.id + '/edit>' + cellvalue + '</a>'
 

@@ -3,45 +3,46 @@ class this.cMoMGridObject
   constructor: ->
     @csrf_token    = $('meta[ name="csrf-token" ]').attr( 'content' )
     @.setup_grid()
-    @.setup_events()
 
-  resize_handler: (event) =>
-    # use fudge factor to prevent horizontal scrollbars
-    width = @.grid_container().width() - 2
-
-    if (width > 0 && Math.abs( width - @grid().width()) > 5)
-      @grid().setGridWidth( width )
-    false
-
-  setup_events: =>
-    $(window).resize @resize_handler
-
-  setup_grid_btns_model: =>
+  getColumnIndexByName: (colName) =>
+    colModel = @.grid().jqGrid( "getGridParam", "colModel" )
+    for i in [0..colModel.length - 1]
+      if (colModel[i].name == colName)
+        return i
+    -1
+    
+  setup_grid_btns_model: ->
     [
-      { 
-        name: 'actions'
-        index: 'actions'
-        width: 55
-        align: 'center'
-        resizable: false
-        sortable: false
-        search: false 
-        formatter: 'actions'
-      }
+      name: 'actions'
+      index: 'actions'
+      width: 55
+      align: 'center'
+      resizable: false
+      sortable: false
+      search: false
     ]
 
   grid_data_model: => []
 
-  grid:           => $('#grid')
-  grid_container: => $('#grid_container')
+  grid:           -> $('#grid')
+  grid_container: -> $('#grid_container')
   grid_pager:     => $(@.grid_pager_id())
-  grid_pager_id:  => '#grid_pager'
+  grid_pager_id:  -> '#grid_pager'
 
   grid_json_url:  -> ''
   grid_json_id:   -> 'id'
   grid_json_rows: -> 'rows'
 
   grid_resource_url: -> ''
+
+  grid_del_row_title:  -> "Delete Row"
+  grid_del_row_caption: (rowID) -> "Delete Row"
+  grid_del_path: (rowID) =>
+    url: @.grid_resource_url() + '/' + rowID
+    mtype: 'DELETE'
+    delData: { authenticity_token: @csrf_token }
+
+  grid_edit_row_title: -> "Edit Row"
 
   jgrid_autowidth: -> true
   jgrid_caption:   -> ''
@@ -60,44 +61,63 @@ class this.cMoMGridObject
       autowidth:   @.jgrid_autowidth()
       caption:     @.jgrid_caption()
       height:      @.jgrid_height()
+      hoverrows:   false
       pager:       @.grid_pager()
       rowList:     @.jgrid_rowList()
       rowNum:      @.jgrid_rowNum()
       sortname:    @.jgrid_sortname()
       sortorder:   @.jgrid_sortorder()
       viewrecords: true
-      addGridRow: @.jgrid_addGridRow
-      beforeSelectRow: @.jgrid_beforeSelectRow
-      editGridRow: @.jgrid_editGridRow
-      onSelectRow: @.jgrid_onSelectRow
+      loadComplete: @.loadComplete
+      beforeSelectRow: (rowID, e ) -> 
+        false
     )
     @.grid().jqGrid( 'navGrid', @.grid_pager_id(), { add:false, edit:false, del:false })
     @.grid().jqGrid( 'gridResize' )
     true
 
-  jgrid_beforeSelectRow: (rowid, e) =>
-    column_id = $.jgrid.getCellIndex( e.target )
-    if (column_id == 0)
-      $.jgrid.del.msg = 'Are you sure, rowid='+rowid+'?'
-      @.grid().delGridRow( rowid, $.extend( { reloadAfterSubmit: true }, @.destroy_path( rowid ) ) )
-      return false
-    true
+  loadComplete: =>
+    iCol = @.getColumnIndexByName( "actions" )
+    @grid().children("tbody")
+           .children("tr.jqgrow")
+           .children("td:nth-child("+(iCol+1)+")")
+           .each (index, element) =>
+             $("<div />",
+               class: "ui-pg-div ui-inline-custom"
+               style: "margin-left:5px; float:left;"
+               title: @.grid_edit_row_title()
+               mouseover: -> $(this).addClass('ui-state-hover')
+               mouseout:  -> $(this).removeClass('ui-state-hover')
+               click: (e) =>
+                 rowID = $(e.target).closest("tr.jqgrow").attr("id")
+                 @.grid_edit_row( rowID )
+             )
+             .append('<span class="ui-icon ui-icon-pencil"></span>')
+             .appendTo( element )
+             $("<div>",
+               class: "ui-pg-div ui-inline-del"
+               style: "margin-left:5px; float:left;"
+               title: @.grid_del_row_title()
+               mouseover: -> $(this).addClass('ui-state-hover')
+               mouseout:  -> $(this).removeClass('ui-state-hover')
+               click: (e) =>
+                 rowID = $(e.target).closest("tr.jqgrow").attr("id")
+                 @.grid_del_row( rowID )
+             )
+             .append('<span class="ui-icon ui-icon-trash"></span>')
+             .appendTo( element )
 
   jgrid_addGridRow: =>
     window.location.href = @.grid_resource_url() + '/new'
 
-  jgrid_editGridRow: (id, properties) =>
-    if (rowid == 'new')
-      window.location.href = @.grid_resource_url()
-    else
-      window.location.href = @.grid_resoruce_url() + '/' + id
+  grid_del_row: (rowID) =>
+    $.jgrid.del.caption = "Delete Row"
+    $.jgrid.del.msg = "Are you sure, rowid =" + rowID + "?"
+    @.grid().delGridRow( rowID, $.extend( @.grid_del_path( rowID ), { reloadAfterSubmit: true } ) )
 
-  jgrid_onSelectRow: (id) =>
-    window.location.href = @.grid_resource_url() + '/' + id
+  grid_edit_row: (rowID) =>
+    window.location.href = @.grid_resource_url() + "/" + rowID + "/edit" 
 
-  destroy_path: (id) =>
-    url: @.grid_resource_url() + '/' + id
-    mtype: 'DELETE'
-    delData: { authenticity_token: @csrf_token }
+
 
 

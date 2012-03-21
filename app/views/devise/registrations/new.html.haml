@@ -4,7 +4,7 @@
   .page_body
     - flash.each do |name, msg|
       = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
-    = render "/devise/registrations/form"
+    = render "form"
     %ul#other_links
       %li
         Already have an account?
