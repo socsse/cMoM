@@ -24,6 +24,13 @@ after "deploy:update_code", "deploy:symlink_config_files"
 
 namespace :deploy do
 
+  desc "Create shared directories"
+  task :create_shared_directories, :roles => :app do
+    run "mkdir -p #{deploy_to}/shared/config"
+    run "mkdir -p #{deploy_to}/shared/log"
+    run "mkdir -p #{deploy_to}/shared/tmp"
+  end
+
   desc "Symbolicly link generated config files"
   task :symlink_config_files, :roles => :app do
     run "ln -nfs #{deploy_to}/shared/config/aws.yml #{release_path}/config/aws.yml"
