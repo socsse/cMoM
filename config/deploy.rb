@@ -19,12 +19,13 @@ set :use_sudo, false
 
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "app_rsa")]
 
-after "deploy:update_code", "deploy:create_shared_directories", "deploy:symlink_config_files"
+after "deploy:update_code", "deploy:create_app_directories", "deploy:symlink_config_files"
 
 namespace :deploy do
 
   desc "Create shared directories"
-  task :create_shared_directories, :roles => :app do
+  task :create_app_directories, :roles => :app do
+    run "mkdir -p #{deploy_to}/releases"
     run "mkdir -p #{deploy_to}/shared/config"
     run "mkdir -p #{deploy_to}/shared/log"
     run "mkdir -p #{deploy_to}/shared/tmp"
