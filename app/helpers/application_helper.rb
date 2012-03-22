@@ -31,4 +31,10 @@ module ApplicationHelper
     content_for( :head ) { tag :meta, :name => name, :content => value unless value.blank? }
   end
 
+  def is_devise_controller?(controller)
+    controller != "devise/registrations" &&
+    controller != "devise/sessions" &&
+    controller != "devise/passwords"
+  end
+
 end

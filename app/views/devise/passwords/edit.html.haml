@@ -10,17 +10,8 @@
                          :url => password_path(resource_name), 
                          :validate => true ) do |form|
       = form.inputs do
-        = form.input :reset_password_token, :hidden
+        = form.input :reset_password_token, :as => :hidden
         = form.input :password, :label => "New password:", :validate => true
         = form.input :password_confirmation, :label => "Password confirmation:"
       = form.buttons do
         = form.commit_button "Change my password"
-    %ul#other_links
-      %li
-        Don't have an account?
-        %br
-        = link_to "Sign up now", new_user_registration_path
-      %li
-        Already have an account?
-        %br
-        = link_to "Sign in now", new_user_session_path
