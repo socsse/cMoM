@@ -40,30 +40,38 @@ class ChipsController < ApplicationController
   end
 
   def new
-    @chip = Chip.init_for_new_controller
+    # note: the chip will be persisted, so update will be called during submit, not create
+    @chip = Chip.chip_for_new( @user )
+
+    @add_peripheral_urls = {
+      "Add a Peripheral..." => nil,
+      "Add UART..." => "/users/#{@user._id}/chips/#{@chip._id}/uarts/new"
+    }
   end
 
   def edit
     @chip = @user.chips.find(params[:id])
-  end
-
-  def create
-    @chip = @user.chips.new(params[:chip])
-    if @chip.save
-      submit_job
-      redirect_to @user
-    else
-        render :action => "new"
-    end
+    Rails.logger.info( "Chip = #{@chip.inspect}" )
+    Rails.logger.info( "Path = #{new_user_chip_uart_path( @user, @chip )}" )
+    @add_peripheral_urls = {
+      "Add a Peripheral..." => nil,
+      "Add UART..." => new_user_chip_uart_path( @user, @chip )
+    }
   end
 
   def update
-    @chip = @user.chips.find(params[:id])
-    @chip.update_attributes!(params[:chip])
+    Rails.logger.info( "Create Params is #{params}" )
+    @chip = @user.chips.find( params[:id] )
+    if params[ 'confirm' ]
+      @chip.update_attributes!(params[:chip])
 
-    submit_job
-    flash[:notice] = "Job queued for #{@chip.name}!"
-    redirect_to @user, :notice => flash[:notice]
+      submit_job
+      flash[:notice] = "Job queued for #{@chip.name}!"
+      redirect_to @user, :notice => flash[:notice]
+    else
+      @chip.cancel_edit
+      redirect_to @user
+    end
   end
 
   def destroy
@@ -72,6 +80,13 @@ class ChipsController < ApplicationController
 
     # jqgrid will take care of the updating
     render :nothing => true
+  end
+
+  def add_peripheral_list
+    @chip = @user.chips.find(params[:id])
+    logger.info "Test"
+    @add_peripheral_list = @chip.add_peripheral_list
+    logger.info "@add_peripheral_list"
   end
 
   def submit_job

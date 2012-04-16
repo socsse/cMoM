@@ -1,0 +1,8 @@
+alert("Test");
+var dialog_html = "<%= escape_javascript render( :partial => 'form', :locals => { :user => @user, :chip => @chip, :uart => @uart, :buttons => false } ) %>";
+alert(dialog_html);
+$('#peripheral_dialog').html("<%= escape_javascript render( :partial => 'form', :locals => { :user => @user, :chip => @chip, :uart => @uart, :buttons => false } ) %>" );
+$('#peripheral_dialog').dialog();
+var myurl = "<%= new_user_chip_uart_path( @user, @chip, @uart) %>";
+
+

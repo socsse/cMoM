@@ -1,0 +1,9 @@
+= semantic_form_for [user, chip, uart], :html => { :id => "uart_form" }, :validate => true do |form|
+  - flash.each do |name, msg|
+    = content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String)
+  = form.inputs do
+    = form.input :name
+  - if buttons
+    = form.buttons do
+      %li= form.commit_button "Save", :name => "commit"
+      %li= form.commit_button "Cancel", :name => "cancel"

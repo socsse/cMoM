@@ -7,8 +7,10 @@ CMoM::Application.routes.draw do
     resources :chips do
       member do
         get 'test_job_msg'
+        get 'add_peripheral_list'
       end
       resources :peripherals
+      resources :uarts, :controller => 'peripherals/uarts'
     end
   end
 

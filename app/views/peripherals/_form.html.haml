@@ -1,6 +1,9 @@
+= Rails.logger.info "Test"
 = semantic_form_for [user, chip, peripheral], :html => { :class => "peripheral_form" } do |form|
   = form.inputs do
     = form.input :name
-  = form.buttons do
-    %li= form.commit_button "Save"
-    %li= link_to "Cancel", @user
+  - Rails.logger.info "Buttons = #{buttons}"
+  - if buttons
+    = form.buttons do
+      %li= form.commit_button "Save 1"
+      %li= link_to "Cancel", @user

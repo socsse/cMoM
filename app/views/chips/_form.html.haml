@@ -8,15 +8,31 @@
 
     grid_data_model: =>
       [
-        { type:'peripheral.type', label:'Type', index:'type', width: 100, align: 'left' }
+        { name:'peripheral.type', label:'Type', index:'type', width: 100, align: 'left' }
         { name:'peripheral.name', label:'Name', index:'name', width: 100, align: 'left' }
         { name:'peripheral.description', label:'Description', index:'description', width: 200, align: 'left' }
       ]
 
     jgrid_caption: -> 'Peripherals'
 
+    reload_grid: ->
+      @.grid().trigger( "reloadGrid" )
+
   jQuery ->
     window.grid_object = new ChipPeripheralGrid
+
+    $("#add_peripheral").change ->
+      url = $(this).find("option:selected").val()
+      window.location = url
+
+-#    $("#add_peripheral").change ->
+-#      url = $(this).find("option:selected").val()
+-#      tag = $("<div></div>")
+-#      $.ajax
+-#        url: url, 
+-#        dataType: "script"
+-#        success: (data) ->
+-#          window.grid_object.reload_grid()
 
 = semantic_form_for [user, chip], :html => { :class => "chip_form" } do |form|
   = form.inputs do
@@ -36,10 +52,14 @@
           = memory.input :sram, :label => "SRAM:", :as => :select, :collection => memory.object.options_for_sram
           = memory.input :emi,  :label => "Use EMI", :as => :boolean
   %br
+  = select_tag :add_peripheral, options_for_select( @add_peripheral_urls )
+  #peripheral_dialog
+  %br
+  %br
   #grid_container
     %table#grid.scroll
     #grid_pager.scroll
   %br
   = form.buttons do
-    %li= form.commit_button "Save"
-    %li= link_to "Cancel", @user
+    %li= form.commit_button "Save", :name => "confirm"
+    %li= form.commit_button "Cancel", :name => "cancel"
